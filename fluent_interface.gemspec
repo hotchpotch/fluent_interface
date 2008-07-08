@@ -5,11 +5,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yuichi Tateno"]
   s.autorequire = %q{}
-  s.date = %q{2008-07-08}
+  s.date = %q{2008-07-09}
   s.description = %q{}
   s.email = %q{hotchpotch@gmail.com}
   s.extra_rdoc_files = ["README", "ChangeLog"]
-  s.files = ["README", "ChangeLog", "Rakefile", "test/test_fluent_interface.rb", "test/test_helper.rb", "lib/fluent_interface.rb"]
+  s.files = ["README", "ChangeLog", "Rakefile", "test/test_fluent_interface.rb", "test/test_helper.rb", "lib/fluent_interface.rb", "examples/webrick_fluent.rb", "examples/example_api.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://fluent_interface.rubyforge.org}
   s.rdoc_options = ["--title", "fluent_interface documentation", "--charset", "utf-8", "--opname", "index.html", "--line-numbers", "--main", "README", "--inline-source", "--exclude", "^(examples|extras)/"]
