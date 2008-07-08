@@ -18,6 +18,13 @@ class FluentInterfaceTest < Test::Unit::TestCase
     execute mock.option
   end
 
+  def test_option_setting_args
+    mock = OptionArgsSettingArgs.new
+    assert_raise(NoMethodError) {mock.option.no_method(:bar)} 
+    assert_equal FluentInterface::FluentProxy, mock.option.foo(:bar).class
+  end
+
+
   def test_option_extend_fluent
     mock = OptionArgsWithoutFluentInterface.new
     mock.extend FluentInterface
@@ -40,6 +47,24 @@ class FluentInterfaceTest < Test::Unit::TestCase
     assert_equal mock.foo(:bar).bar(:baz).execute, {:foo => :bar, :bar => :baz}
   end
 
+  def test_hash_getter
+    mock = FluentInterface.fluent(Hash.new, :update)
+    mock = mock.foo(:bar).bar(:baz) 
+    assert_equal mock.foo, :bar
+    assert_equal mock.bar, :baz
+    assert_not_equal mock.bar, :ba
+
+    mock = FluentInterface.fluent(Hash.new, :update)
+    mock = mock.foo(:bar)
+    assert_equal mock.foo, :bar
+    assert_not_equal mock.bar, :baz
+  end
+
+  def test_hash_methodnames
+    mock = FluentInterface.fluent(NewArgsWithoutFluentInterface, :new, [:foo, :bar])
+    assert_equal mock.foo(:bar).bar(:baz).execute.options, {:foo => :bar, :bar => :baz}
+    assert_raise(NoMethodError) {mock.no_method(:bar)} 
+  end
 
   def execute(mock)
     execute_args = []

@@ -17,6 +17,12 @@ module Mock
     fluent :option
   end
 
+  class OptionArgsSettingArgs < OptionArgsWithoutFluentInterface
+    include FluentInterface
+    fluent :option, :option, [:foo, :bar]
+  end
+
+
   class NewArgsWithoutFluentInterface
     attr_reader :options
     def initialize(options)
