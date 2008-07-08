@@ -35,7 +35,7 @@ task :package => [:clean]
 
 Rake::TestTask.new("test") do |t|
 	t.libs   << "test"
-	t.pattern = "test/**/*_test.rb"
+	t.pattern = "test/**/test_*.rb"
 	t.verbose = true
 end
 
@@ -129,3 +129,10 @@ task :release => [:clean, :package] do |t|
 	puts "Releasing #{NAME} v. #{VERS}"
 	rf.add_release RUBYFORGE_PROJECT, NAME, VERS, *files
 end
+
+desc 'Show information about the gem.'
+task :debug_gem do
+  require 'date'
+  puts spec.to_ruby
+end
+
